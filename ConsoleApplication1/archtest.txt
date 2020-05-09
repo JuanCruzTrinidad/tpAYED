@@ -1,0 +1,26 @@
+circulo rojo 2,5 
+cubo azul 4
+cilindro amarillo 2,5; 3
+rectangulo amarillo 6; 3
+triangulo azul 5; 2,5
+circulo rojo 3
+circulo azul 3,2
+rectangulo rojo 1,4; 2
+cilindro azul 3; 4
+circulo amarillo 2,5
+cubo azul 4
+cilindro rojo 2,5; 3
+rectangulo azul 3; 5
+triangulo rojo 3; 1,5
+circulo amarillo 3,2
+rectangulo azul 1,4; 2
+cilindro rojo 3; 4
+circulo azul 2,5
+cubo amarillo 4
+cilindro rojo 2,5; 3
+rectangulo azul 3,5; 6
+triangulo amarillo 4; 2
+circulo azul 3
+circulo rojo 3,2
+rectangulo rojo 1,4; 2
+cilindro azul 3; 4

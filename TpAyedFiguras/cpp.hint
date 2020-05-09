@@ -1,0 +1,8 @@
+// Los archivos de sugerencia ayudan al IDE de Visual Studio a interpretar los identificadores de Visual C++
+// por ejemplo, los nombres de funciones y macros.
+// Para obtener más información, consulte https://go.microsoft.com/fwlink/?linkid=865984
+#define _WINDOWS_NUMERICS_BEGIN_NAMESPACE_
+// Los archivos de sugerencia ayudan al IDE de Visual Studio a interpretar los identificadores de Visual C++
+// por ejemplo, los nombres de funciones y macros.
+// Para obtener más información, consulte https://go.microsoft.com/fwlink/?linkid=865984
+#define _WINDOWS_NUMERICS_BEGIN_NAMESPACE_
