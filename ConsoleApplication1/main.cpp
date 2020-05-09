@@ -94,8 +94,13 @@ void CargarDesdeArchivo(ifstream& Archivo, Lista& Lista)
                     aux = "";
             }
             if (linea.at(i) == ';'){
-                    aux = linea.at(i+2);
+                i++;
+                while (linea.size() > i)
+                {
+                    aux = linea.at(i);
                     Dato4.append(aux);
+                    i++;
+                }
                 }
             
         }

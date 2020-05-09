@@ -75,7 +75,7 @@ float calcularArea(string nombre, float valor, float valor2) {
     float area = 0;
 
     if (nombre.compare("circulo") == false) {
-        area = valor * 3.16;
+        area = valor * 3.14;
     }
     if (nombre.compare("cubo") == false) {
         area = valor * valor;
@@ -85,6 +85,9 @@ float calcularArea(string nombre, float valor, float valor2) {
     }
     if (nombre.compare("rectangulo") == false) {
         area = valor * valor2;
+    }
+    if (nombre.compare("cilindro") == false) {
+        area = (valor * 3.14) * valor2;
     }
     return area;
 }
