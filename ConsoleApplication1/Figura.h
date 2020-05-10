@@ -18,6 +18,7 @@ typedef struct {
     string color;
     float valor1;
     float valor2;
+    float area;
 }Figura;
 
 typedef Figura* PtrFigura;
