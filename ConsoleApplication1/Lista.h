@@ -11,16 +11,30 @@
 #include <string>
 #include <sstream>
 
+/* 
+  Tipo de informacion que esta contenida en los nodos de la lista, 
+  identificada como DatoLista. 
+*/
 typedef void* PtrDatoLista;
 
+/*
+  Tipo de estructura de los nodos de la lista.
+*/
 struct NodoLista
 {
     PtrDatoLista DatoLista;
     NodoLista* SgteDL;
 };
 
+/*
+  Tipo de puntero a los nodos de la lista, el cual se usa para recorrer
+  la lista y acceder a sus datos.
+*/
 typedef NodoLista* PtrNodoLista;
 
+/*
+  Tipo de estructura de la lista.
+*/
 struct Lista
 {
     PtrNodoLista Primero;
@@ -178,16 +192,56 @@ void EliminarUltimo(Lista& mi_lista);
 PtrNodoLista CrearNodo(PtrDatoLista mi_dato);
 
 //***************************************************************************************
+
+/*
+  PRE: la lista debe haber sido creada.
+  POST: agrega el dato al nodo de la lista.
+
+  mi_lista: lista sobre la cual se invoca la primitiva.
+  NodoApuntado: nodo a ser modificado.
+  mi_dato: elemento a insertar.
+*/
 void ColocarDato(Lista& mi_lista, PtrNodoLista NodoApuntado, PtrDatoLista mi_dato);    //PUEDE DEVOLVER UN BOOLEANO?
 
+/*
+  PRE: la lista debe haber sido creada.
+  POST: obtengo el dato del nodo.
+
+  mi_lista: lista sobre la cual se invoca la primitiva.
+  NodoApuntado: nodo del dato a ser obtenido.
+  return: puntero al dato del nodo.
+*/
 PtrDatoLista ObtenerDato(Lista mi_lista, PtrNodoLista NodoApuntado);
 
+/*
+  PRE: la lista debe haber sido creada.
+  POST: se elimina el dato y el nodo.
+
+  mi_lista: lista sobre la cual se invoca la primitiva.
+  mi_dato: dato que quiero eliminar.
+*/
 void EliminarDatoYNodo(Lista& mi_lista, PtrDatoLista mi_dato);     //PUEDE DEVOLVER UN BOOLEANO?
 
+/*
+  PRE: la lista debe haber sido creada.
+  POST: si el dato se encuentra en la lista, devuelve el puntero al primer nodo
+        que lo contiene. Si el dato no se encuentra en la lista devuelve Fin_Lista().
+
+  mi_lista: lista sobre la cual se invoca la primitiva.
+  mi_dato: elemento a localizar.
+  return: puntero al nodo localizado o Fin_Lista().
+*/
 PtrNodoLista LocalizarDato(Lista mi_lista, PtrDatoLista mi_dato);
 
 //**************************************************************************************
 
+/*
+  PRE: la lista debe haber sido creada.
+  POST: devuelve la longitud de la lista.
+
+  mi_lista: lista sobre la cual se invoca la primitiva.
+  return: longitud de la lista.
+*/
 int Longitud_Lista(Lista mi_lista);
 
 //void imprimirLista(Lista &mi_lista);

@@ -12,7 +12,9 @@
 
 using namespace std;
 
-//Definicion de Tipo de Estructura Circulo
+/*
+  Definicion de tipo de estructura Figura
+*/
 typedef struct {
     string forma;
     string color;
@@ -21,13 +23,16 @@ typedef struct {
     float area;
 }Figura;
 
+/*
+  
+*/
 typedef Figura* PtrFigura;
 
 /*
   PRE: la figura no debe haber sido creada.
   POST: figura queda creada y preparada para ser usada.
 
-  figura: estructura de datos a ser creado.
+  figura: estructura de datos a ser creada.
 */
 void crearFigura(PtrFigura& figura);
 
@@ -49,20 +54,91 @@ float getValor2(PtrFigura& figura);
 
 void setValor2(PtrFigura& figura, float valor2);
 
+/*
+  PRE:
+  POST:
 
+  Archivo:
+  lista:
+
+  acavalalogica
+*/
+void CargarDesdeArchivo(ifstream& Archivo, Lista& lista);
+
+/*
+  PRE:
+  POST:
+
+  listaFiguras:
+  forma:
+  color:
+  valor1:
+  valor2:
+
+  acavalalogica
+*/
+void CargarListaFiguras(Lista& listaFiguras, string forma, string color, float valor1, float valor2);
+
+/*
+  PRE: el string a convertir debe contener solo numeros.
+  POST: devuelve str convertido en un dato tipo float.
+
+  str: string a convertir a float.
+  return: el float convertido.
+
+  Primero tomamos un string llamado str. Luego nos fijamos si contiene una coma(,). Si no la contiene se 
+  transforma en float y sale. Si la contiene reemplaza la coma por un punto, lo transforma en float y sale.
+*/
 float convertirStringAFloat(string str); //Es valido crear un .h y .cpp funciones???
 
-float calcularArea(string nombre, float valor, float valor2);
+/*
+  PRE:
+  POST:
 
-float calcularAreaTotal(Lista& listaFiguras);
+  listaFiguras:
 
+  acavalalogica
+*/
 void recorrerLista(Lista& listaFiguras);
 
+/*
+  PRE: 
+  POST:
+
+  nombre:
+  valor1:
+  valor2:
+  return:
+
+  acavalalogica
+*/
+float calcularArea(string nombre, float valor1, float valor2);
+
+/*
+  PRE: la listaFiguras debe haber sido creada.
+  POST: devuelve el area total de las figuras que se encuentran en la lista.
+
+  listaFiguras: lista sobre la cual se invoca la primitiva.
+  return: float que contiene el areaTotal.
+
+  Se inicializa un cursor en el primer elemento de la lista. Este cursor va a recorrer toda la lista hasta que termine.
+  Mientras el cursor recorre la lista se van sumando las areas de las figuras.
+*/
+float calcularAreaTotal(Lista& listaFiguras);
+
+/*
+  PRE: la listaFiguras debe haber sido creada.
+  POST: se imprimen las figuras con la cantidad que corresponde.
+
+  listaFiguras: lista sobre la cual se invoca la primitiva.
+
+  Se inicializa un cursor en el primer elemento de la lista y un array del tipo string que contiene todas las formas
+  posibles. Se hace un ciclo for que funciona como recorredor del array figuras, y dentro se recorre toda la lista
+  con el cursor.
+  Si la forma de la figura actual coincide con la figura de figuras[] se suma 1 al contador. Cuando termina de recorrer
+  la lista se imprime la figura correspondiente a figuras[] y la cantidad de veces que aparecio.
+*/
 void totalPorFigura(Lista& listaFiguras);
-
-void CargarListaFiguras(Lista& listaFiguras, string forma, string color, float  valor1, float valor2);
-
-void CargarDesdeArchivo(ifstream& Archivo, Lista& lista);
 
 
 /*
@@ -94,7 +170,7 @@ void CargarDesdeArchivo(ifstream& Archivo, Lista& lista);
   datos: lista que contiene las figuras.
   nuevaFigura: Figura a ser insertada en la lista.
 */
-void guardarFiguraCompleja(string auxLinea, Lista& datos, Figura nuevaFigura);
+//void guardarFiguraCompleja(string auxLinea, Lista& datos, Figura nuevaFigura);
 
 #endif // FIGURA_H_INCLUDED
 
