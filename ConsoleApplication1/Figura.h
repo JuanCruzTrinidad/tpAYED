@@ -54,6 +54,17 @@ float convertirStringAFloat(string str); //Es valido crear un .h y .cpp funcione
 
 float calcularArea(string nombre, float valor, float valor2);
 
+float calcularAreaTotal(Lista& listaFiguras);
+
+void recorrerLista(Lista& listaFiguras);
+
+void totalPorFigura(Lista& listaFiguras);
+
+void CargarListaFiguras(Lista& listaFiguras, string forma, string color, float  valor1, float valor2);
+
+void CargarDesdeArchivo(ifstream& Archivo, Lista& lista);
+
+
 /*
   PRE: la lista listaFiguras debe haber sido creada y contener elementos.
   POST: se imprime la lista listaFiguras.
