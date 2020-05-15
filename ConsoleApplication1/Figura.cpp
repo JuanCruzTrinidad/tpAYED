@@ -191,16 +191,16 @@ float calcularAreaTotal(Lista& listaFiguras) {
 void totalPorFigura(Lista& listaFiguras) {
     PtrNodoLista cursor = listaFiguras.Primero;
     string figuras[5] = { "circulo", "cilindro", "cubo", "triangulo", "rectangulo" }; //Array con las figuras.
-    int contador = 0;
+    float sumaAreas = 0;
     for (int i = 0; i <= 4; i++) { //Figuras
         while (cursor != Fin_Lista()) {
             if (((Figura*)cursor->DatoLista)->forma == figuras[i]) {
-                contador++;
+                sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
             }
             cursor = cursor->SgteDL;
         }
-        cout << "\t" << figuras[i] << ": " << contador << endl;
-        contador = 0;
+        cout << "\t" << figuras[i] << ": " << sumaAreas << endl;
+        sumaAreas = 0;
         cursor = listaFiguras.Primero;
     }
     delete (cursor);

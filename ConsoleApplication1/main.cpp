@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     CrearLista(listaFiguras);   //constructor de la lista
 
     ifstream Archivo_figuras;
-    Archivo_figuras.open("archtest.txt", ios::in);   // Abro el archivo (solo leida)
+    Archivo_figuras.open("archivotest.txt", ios::in);   // Abro el archivo (solo leida)
 
     CargarDesdeArchivo(Archivo_figuras, listaFiguras);
     float areaTotal=0;
