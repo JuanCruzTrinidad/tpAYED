@@ -140,6 +140,9 @@ float calcularAreaTotal(Lista& listaFiguras);
 */
 void totalPorFigura(Lista& listaFiguras);
 
+void totalPorFiguraColor(Lista& listaFiguras);
+
+void coloresEnListaFiguras(Lista& listaFiguras, string colores[10]);
 
 /*
   PRE: la lista listaFiguras debe haber sido creada y contener elementos.

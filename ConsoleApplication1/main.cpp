@@ -42,12 +42,15 @@ int main(int argc, char** argv) {
 
     CargarDesdeArchivo(Archivo_figuras, listaFiguras);
     float areaTotal=0;
-    recorrerLista(listaFiguras);  //Imprime la lista
+    recorrerLista(listaFiguras);  //Imprime la lista y calcula el area de las figuras.
     cout << endl;
     cout << "Area Total: " << calcularAreaTotal(listaFiguras) << endl;
     cout << endl;
     cout << "Totales por figura: " << endl;
     totalPorFigura(listaFiguras);
+    cout << "Totales por figura-Color: " << endl;
+    totalPorFiguraColor(listaFiguras);
+
     Archivo_figuras.close();
     return 0;
 }

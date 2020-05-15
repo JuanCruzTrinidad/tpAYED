@@ -92,10 +92,10 @@ void CargarDesdeArchivo(ifstream& Archivo, Lista& lista)
             }
         }
         a = convertirStringAFloat(Dato3);
-        if (Dato4.size() > 0) {
-            b = convertirStringAFloat(Dato4);
-        }
-        CargarListaFiguras(lista, Dato1, Dato2, a, b);
+if (Dato4.size() > 0) {
+    b = convertirStringAFloat(Dato4);
+}
+CargarListaFiguras(lista, Dato1, Dato2, a, b);
     }
 }
 
@@ -126,7 +126,7 @@ float convertirStringAFloat(string str) {
         return number;
     }
     string punto = ".";
-    str.replace(coma,1,punto);
+    str.replace(coma, 1, punto);
     istringstream iss(str);
     iss >> number;
     return number;
@@ -186,28 +186,88 @@ float calcularAreaTotal(Lista& listaFiguras) {
     return areaTotal;
 }
 
+/* Busca los colores que hay y los coloca en un array sin repetir */
+void coloresEnListaFiguras(Lista& listaFiguras, string colores[10]) {
+    PtrNodoLista cursor = listaFiguras.Primero;
+    string colorActual;
+    int i = 0;
 
-/* Calcula el total de las figuras */
+    while (cursor != Fin_Lista()) {
+        colorActual = ((Figura*)cursor->DatoLista)->color;
+        i = 0;
+        for (i = 0; i <= 9; i++) {
+            if (colorActual == colores[i]) {
+                i = 10;
+            } else {
+                if (colores[i] == "") {
+                    colores[i] = colorActual;
+                    i = 10;
+                }
+            }
+        }
+        cursor = cursor->SgteDL;
+    }
+
+    cursor = nullptr;
+    delete (cursor);
+}
+
+/* Calcula el total de las areas por figuras */
 void totalPorFigura(Lista& listaFiguras) {
     PtrNodoLista cursor = listaFiguras.Primero;
     string figuras[5] = { "circulo", "cilindro", "cubo", "triangulo", "rectangulo" }; //Array con las figuras.
     float sumaAreas = 0;
+
     for (int i = 0; i <= 4; i++) { //Figuras
+        cout << "\tDetalle: "<< figuras[i] << endl;
         while (cursor != Fin_Lista()) {
             if (((Figura*)cursor->DatoLista)->forma == figuras[i]) {
+                cout << "\t  " << figuras[i] << ", " << ((Figura*)cursor->DatoLista)->color <<", "<<((Figura*)cursor->DatoLista)->area << endl;
                 sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
             }
             cursor = cursor->SgteDL;
         }
-        cout << "\t" << figuras[i] << ": " << sumaAreas << endl;
+        cout << "\t" << "    TOTAL: " << sumaAreas << " cm^2." << endl << endl;
         sumaAreas = 0;
         cursor = listaFiguras.Primero;
     }
+    //Hay que ponerlo en null primero pq cuando lo deleteas sin esto creo que comprometes a la lista.
+    cursor = nullptr;
     delete (cursor);
 }
 
+/* Calcula el total de las areas por figura-color */
+void totalPorFiguraColor(Lista& listaFiguras) {
+    PtrNodoLista cursor = listaFiguras.Primero;
+    string figuras[5] = { "circulo", "cilindro", "cubo", "triangulo", "rectangulo" }; //Array con las figuras.
+    string colores[10];
+    coloresEnListaFiguras(listaFiguras, colores);
+    float sumaAreas = 0;
 
+    for (int j = 0; j <= 9; j++) { //Colores
+        if (colores[j] != "") { //Si la posicion no esta vacia.
+            cout << "----------------- Color " << colores[j] << " -----------------" << endl;
+            for (int i = 0; i <= 4; i++) { //Figuras
+                cout << "\tDetalle: " << figuras[i] << endl;
+                while (cursor != Fin_Lista()) {
+                    if (((Figura*)cursor->DatoLista)->forma == figuras[i] && ((Figura*)cursor->DatoLista)->color == colores[j]) {
+                        cout << "\t~" << figuras[i] << ", " << ((Figura*)cursor->DatoLista)->color << ", " << ((Figura*)cursor->DatoLista)->area << endl;
+                        sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
+                    }
+                    cursor = cursor->SgteDL;
+                }
+                cout << "\t" << "Total: " << sumaAreas << " cm^2." << endl << endl;
+                sumaAreas = 0;
+                cursor = listaFiguras.Primero;
+            }
 
+        }
+        
+    }
+    //Hay que ponerlo en null primero pq cuando lo deleteas sin esto creo que comprometes a la lista.
+    cursor = nullptr;
+    delete (cursor);
+}
 
 
 
