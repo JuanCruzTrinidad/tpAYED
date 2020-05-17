@@ -188,25 +188,47 @@ float calcularAreaTotal(Lista& listaFiguras) {
 
 
 /* Calcula el total de las figuras */
-void totalPorFigura(Lista& listaFiguras) {
-    PtrNodoLista cursor = listaFiguras.Primero;
+void totalPorFigura(Lista& listaFigurasOriginal) {
+    PtrNodoLista cursor = listaFigurasOriginal.Primero;
     string figuras[5] = { "circulo", "cilindro", "cubo", "triangulo", "rectangulo" }; //Array con las figuras.
-    int contador = 0;
+    Lista listaFiguras; //Instancia una nueva lista de figuras auxiliar
     for (int i = 0; i <= 4; i++) { //Figuras
-        while (cursor != Fin_Lista()) {
-            if (((Figura*)cursor->DatoLista)->forma == figuras[i]) {
-                contador++;
+        CrearLista(listaFiguras); //por cada iteracion del for, vuelvo a crear la lista
+        while (cursor != Fin_Lista()) { //este primer while lo que hace es recorrer la lista original buscando emparejar
+            if (((Figura*)cursor->DatoLista)->forma == figuras[i]) { //y al encontrar que concuerden con lo que busca, lo guarda en 
+                AdicionarFinal(listaFiguras, ((Figura*)cursor->DatoLista)); //la nueva lista que instancie antes
             }
-            cursor = cursor->SgteDL;
+            cursor = cursor->SgteDL; //va recorriendo la lista original
         }
-        cout << "\t" << figuras[i] << ": " << contador << endl;
-        contador = 0;
-        cursor = listaFiguras.Primero;
+        cursor = listaFiguras.Primero; //al terminar de añadir a la auxiliar lo que deseo recorrer, itero por figura. Apunto el cursor a la auxiliar.
+        cout << "\t" << figuras[i] << ": " << Longitud_Lista(listaFiguras) << endl; //diciendo la cantidad
+        cout << "Area total por figura" << ":" << calcularAreaTotal(listaFiguras) << endl;
+        recorrerLista(listaFiguras); //haciendo mini recorridos de esas listas
+        DestruirLista(listaFiguras); // eliminando las lista en cuestion auxilizar, que en una nueva iteracion vuelve a crearse
+        cursor = listaFigurasOriginal.Primero; //apunto el cursor a la lista original, se repite la iteracion. 
     }
+    cursor = listaFiguras.Primero;
     delete (cursor);
 }
 
 
+void totalPorFiguraColor(Lista& listaFigurasOriginal) {
+    PtrNodoLista cursor = listaFigurasOriginal.Primero;
+    string figuras[5] = { "circulo", "cilindro", "cubo", "triangulo", "rectangulo" }; //Array con las figuras.
+    string colores[10] = { "amarillo", "rojo", "azul" };
+    string colorActual = "";
+    Lista listaFiguras; //Instancia una nueva lista de figuras auxiliar
+    for (int i = 0; i <= 4; i++) { //Figuras
+        for (int j = 0; j <= 2; j++) {
+            CrearLista(listaFiguras);
+            if (((Figura*)cursor->DatoLista)->forma == figuras[i] && ((Figura*)cursor->DatoLista)->color == "rojo")
+            {
+                cout << ((Figura*)cursor->DatoLista)->forma << ":" << ((Figura*)cursor->DatoLista)->color << endl;
+            }
+            }
+        }
+    }
+    
 
 
 

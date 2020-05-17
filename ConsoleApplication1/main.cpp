@@ -26,10 +26,10 @@ using namespace std;
     -Tipo: Listo.
     -Color: Listo.
     -Cantidad de Plastico total: Listo.
-    -Totales por Figura: Listo.
+    -Totales por Figura: Listo. (Arreglado)
     -Totales por Figura-Color:
     -Dentro de Color mostrar el orden de las figuras:
-    -Figuras ordenadas por el tamanio de sus areas:
+    -Figuras ordenadas por el tamaño de sus areas:
 */
 
 int main(int argc, char** argv) {
@@ -41,13 +41,17 @@ int main(int argc, char** argv) {
     Archivo_figuras.open("archtest.txt", ios::in);   // Abro el archivo (solo leida)
 
     CargarDesdeArchivo(Archivo_figuras, listaFiguras);
-    float areaTotal=0;
+    float areaTotal = 0;
     recorrerLista(listaFiguras);  //Imprime la lista
     cout << endl;
     cout << "Area Total: " << calcularAreaTotal(listaFiguras) << endl;
     cout << endl;
     cout << "Totales por figura: " << endl;
-    totalPorFigura(listaFiguras);
+    cout << Longitud_Lista(listaFiguras) << endl;
+    totalPorFigura(listaFiguras); //anda //al finalizar algo hago mal.
+    cout << Longitud_Lista(listaFiguras) << endl; //muere
+    cout << "Totales por Figura-Color" << endl;
+    totalPorFiguraColor(listaFiguras);
     Archivo_figuras.close();
     return 0;
 }
