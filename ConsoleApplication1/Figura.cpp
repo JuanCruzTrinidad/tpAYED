@@ -92,10 +92,10 @@ void CargarDesdeArchivo(ifstream& Archivo, Lista& lista)
             }
         }
         a = convertirStringAFloat(Dato3);
-        if (Dato4.size() > 0) {
-            b = convertirStringAFloat(Dato4);
-        }
-        CargarListaFiguras(lista, Dato1, Dato2, a, b);
+if (Dato4.size() > 0) {
+    b = convertirStringAFloat(Dato4);
+}
+CargarListaFiguras(lista, Dato1, Dato2, a, b);
     }
 }
 
@@ -126,7 +126,7 @@ float convertirStringAFloat(string str) {
         return number;
     }
     string punto = ".";
-    str.replace(coma,1,punto);
+    str.replace(coma, 1, punto);
     istringstream iss(str);
     iss >> number;
     return number;
@@ -186,50 +186,88 @@ float calcularAreaTotal(Lista& listaFiguras) {
     return areaTotal;
 }
 
+/* Busca los colores que hay y los coloca en un array sin repetir */
+void coloresEnListaFiguras(Lista& listaFiguras, string colores[10]) {
+    PtrNodoLista cursor = listaFiguras.Primero;
+    string colorActual;
+    int i = 0;
 
-/* Calcula el total de las figuras */
-void totalPorFigura(Lista& listaFigurasOriginal) {
-    PtrNodoLista cursor = listaFigurasOriginal.Primero;
-    string figuras[5] = { "circulo", "cilindro", "cubo", "triangulo", "rectangulo" }; //Array con las figuras.
-    Lista listaFiguras; //Instancia una nueva lista de figuras auxiliar
-    for (int i = 0; i <= 4; i++) { //Figuras
-        CrearLista(listaFiguras); //por cada iteracion del for, vuelvo a crear la lista
-        while (cursor != Fin_Lista()) { //este primer while lo que hace es recorrer la lista original buscando emparejar
-            if (((Figura*)cursor->DatoLista)->forma == figuras[i]) { //y al encontrar que concuerden con lo que busca, lo guarda en 
-                AdicionarFinal(listaFiguras, ((Figura*)cursor->DatoLista)); //la nueva lista que instancie antes
+    while (cursor != Fin_Lista()) {
+        colorActual = ((Figura*)cursor->DatoLista)->color;
+        i = 0;
+        for (i = 0; i <= 9; i++) {
+            if (colorActual == colores[i]) {
+                i = 10;
+            } else {
+                if (colores[i] == "") {
+                    colores[i] = colorActual;
+                    i = 10;
+                }
             }
-            cursor = cursor->SgteDL; //va recorriendo la lista original
         }
-        cursor = listaFiguras.Primero; //al terminar de añadir a la auxiliar lo que deseo recorrer, itero por figura. Apunto el cursor a la auxiliar.
-        cout << "\t" << figuras[i] << ": " << Longitud_Lista(listaFiguras) << endl; //diciendo la cantidad
-        cout << "Area total por figura" << ":" << calcularAreaTotal(listaFiguras) << endl;
-        recorrerLista(listaFiguras); //haciendo mini recorridos de esas listas
-        DestruirLista(listaFiguras); // eliminando las lista en cuestion auxilizar, que en una nueva iteracion vuelve a crearse
-        cursor = listaFigurasOriginal.Primero; //apunto el cursor a la lista original, se repite la iteracion. 
+        cursor = cursor->SgteDL;
     }
-    cursor = listaFiguras.Primero;
+
+    cursor = nullptr;
     delete (cursor);
 }
 
-
-void totalPorFiguraColor(Lista& listaFigurasOriginal) {
-    PtrNodoLista cursor = listaFigurasOriginal.Primero;
+/* Calcula el total de las areas por figuras */
+void totalPorFigura(Lista& listaFiguras) {
+    PtrNodoLista cursor = listaFiguras.Primero;
     string figuras[5] = { "circulo", "cilindro", "cubo", "triangulo", "rectangulo" }; //Array con las figuras.
-    string colores[10] = { "amarillo", "rojo", "azul" };
-    string colorActual = "";
-    Lista listaFiguras; //Instancia una nueva lista de figuras auxiliar
-    for (int i = 0; i <= 4; i++) { //Figuras
-        for (int j = 0; j <= 2; j++) {
-            CrearLista(listaFiguras);
-            if (((Figura*)cursor->DatoLista)->forma == figuras[i] && ((Figura*)cursor->DatoLista)->color == "rojo")
-            {
-                cout << ((Figura*)cursor->DatoLista)->forma << ":" << ((Figura*)cursor->DatoLista)->color << endl;
-            }
-            }
-        }
-    }
-    
+    float sumaAreas = 0;
 
+    for (int i = 0; i <= 4; i++) { //Figuras
+        cout << "\tDetalle: "<< figuras[i] << endl;
+        while (cursor != Fin_Lista()) {
+            if (((Figura*)cursor->DatoLista)->forma == figuras[i]) {
+                cout << "\t  " << figuras[i] << ", " << ((Figura*)cursor->DatoLista)->color <<", "<<((Figura*)cursor->DatoLista)->area << endl;
+                sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
+            }
+            cursor = cursor->SgteDL;
+        }
+        cout << "\t" << "    TOTAL: " << sumaAreas << " cm^2." << endl << endl;
+        sumaAreas = 0;
+        cursor = listaFiguras.Primero;
+    }
+    //Hay que ponerlo en null primero pq cuando lo deleteas sin esto creo que comprometes a la lista.
+    cursor = nullptr;
+    delete (cursor);
+}
+
+/* Calcula el total de las areas por figura-color */
+void totalPorFiguraColor(Lista& listaFiguras) {
+    PtrNodoLista cursor = listaFiguras.Primero;
+    string figuras[5] = { "circulo", "cilindro", "cubo", "triangulo", "rectangulo" }; //Array con las figuras.
+    string colores[10];
+    coloresEnListaFiguras(listaFiguras, colores);
+    float sumaAreas = 0;
+
+    for (int j = 0; j <= 9; j++) { //Colores
+        if (colores[j] != "") { //Si la posicion no esta vacia.
+            cout << "----------------- Color " << colores[j] << " -----------------" << endl;
+            for (int i = 0; i <= 4; i++) { //Figuras
+                cout << "\tDetalle: " << figuras[i] << endl;
+                while (cursor != Fin_Lista()) {
+                    if (((Figura*)cursor->DatoLista)->forma == figuras[i] && ((Figura*)cursor->DatoLista)->color == colores[j]) {
+                        cout << "\t~" << figuras[i] << ", " << ((Figura*)cursor->DatoLista)->color << ", " << ((Figura*)cursor->DatoLista)->area << endl;
+                        sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
+                    }
+                    cursor = cursor->SgteDL;
+                }
+                cout << "\t" << "Total: " << sumaAreas << " cm^2." << endl << endl;
+                sumaAreas = 0;
+                cursor = listaFiguras.Primero;
+            }
+
+        }
+        
+    }
+    //Hay que ponerlo en null primero pq cuando lo deleteas sin esto creo que comprometes a la lista.
+    cursor = nullptr;
+    delete (cursor);
+}
 
 
 
