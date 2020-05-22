@@ -92,10 +92,10 @@ void CargarDesdeArchivo(ifstream& Archivo, Lista& lista)
             }
         }
         a = convertirStringAFloat(Dato3);
-if (Dato4.size() > 0) {
-    b = convertirStringAFloat(Dato4);
-}
-CargarListaFiguras(lista, Dato1, Dato2, a, b);
+        if (Dato4.size() > 0) {
+            b = convertirStringAFloat(Dato4);
+        }
+        CargarListaFiguras(lista, Dato1, Dato2, a, b);
     }
 }
 
@@ -132,10 +132,25 @@ float convertirStringAFloat(string str) {
     return number;
 }
 
+void insertarArea(Lista& listaFiguras) {
+    PtrNodoLista cursor = listaFiguras.Primero;
+    while (cursor != Fin_Lista()) {
+        ((Figura*)cursor->DatoLista)->area = calcularArea(((Figura*)cursor->DatoLista)->forma, ((Figura*)cursor->DatoLista)->valor1, ((Figura*)cursor->DatoLista)->valor2);
+        cursor = cursor->SgteDL;
+    }
+    cursor = nullptr;
+    delete(cursor);
+}
+
+
 /*Recorro la lista e imprimo */
 void recorrerLista(Lista& listaFiguras) {
     PtrNodoLista cursor = listaFiguras.Primero;
     float areaTotal = 0;
+
+    //Calculamos y guardamos el area de cada figura.
+    insertarArea(listaFiguras);
+
     while (cursor != Fin_Lista()) {
         cout << ((Figura*)cursor->DatoLista)->forma << " ";
         cout << ((Figura*)cursor->DatoLista)->color << " ";
@@ -144,9 +159,7 @@ void recorrerLista(Lista& listaFiguras) {
             cout << ((Figura*)cursor->DatoLista)->valor2;
         }
         cout << endl;
-        float areaFiguraActual = calcularArea(((Figura*)cursor->DatoLista)->forma, ((Figura*)cursor->DatoLista)->valor1, ((Figura*)cursor->DatoLista)->valor2);
-        ((Figura*)cursor->DatoLista)->area = areaFiguraActual;
-        cout << "Area: " << areaFiguraActual << endl;
+        cout << "Area: " << ((Figura*)cursor->DatoLista)->area << endl;
         cursor = cursor->SgteDL;
     }
     delete (cursor);
@@ -269,53 +282,59 @@ void totalPorFiguraColor(Lista& listaFiguras) {
     delete (cursor);
 }
 
+//Lista de figuras ordenadas de forma descendiente por su area.
+void figurasDescendienteArea(string archivo) {
 
+    //Creo una listaFigurasAux, que vendria a ser igual a listaFiguras.
 
-/*
-void guardarFiguraCompleja(string auxLinea, Lista &datos, Figura nuevaFigura){
-    /* CON PUNTEROS
-    stringstream ss(auxLinea); //No se muy bien como funciona todavia jejo
+    Lista listaFigurasAux; // Lista donde voy a guardar las figuras.
+    CrearLista(listaFigurasAux);   //constructor de la lista
 
-    //Obtengo los datos y los guardo donde corresponde
+    ifstream archivo_figuras;
+    archivo_figuras.open(archivo, ios::in);
 
-    getline(ss, nuevaFigura->forma, ' ' ); //Separo la forma
-    getline(ss, nuevaFigura->color, ' ' ); //Separo los numeros
+    CargarDesdeArchivo(archivo_figuras, listaFigurasAux);
+    archivo_figuras.close();
 
-    string auxiliarStr;
-    getline(ss, auxiliarStr, ';' ); //Separo los numeros
-    float auxNumber = convertirStringAFloat(auxiliarStr);
-    nuevaFigura->valor1 = auxNumber;
+    insertarArea(listaFigurasAux);
 
-    getline(ss, auxiliarStr, ';' ); //Separo los numeros
-    auxNumber = convertirStringAFloat(auxiliarStr);
-    nuevaFigura->valor2 = auxNumber;
+    PtrNodoLista cursor1 = listaFigurasAux.Primero;
+    PtrNodoLista cursor2;
 
-    adicionarFinal(datos,nuevaFigura); //Se guarda la figura al final de la lista
-    /
+    float aux = 0;
 
-    // CON GETS Y SETS
+    //Se ordenan las figuras segun su area
+    while (cursor1 != Fin_Lista()) {
 
-    stringstream ss(auxLinea); //No se muy bien como funciona todavia jejo
+        cursor2 = listaFigurasAux.Primero;
+        while (cursor2 != Fin_Lista()) {
 
-    //Obtengo los datos y los guardo donde corresponde
-    string auxiliarStr;
+            if (((Figura*)cursor1->DatoLista)->area > ((Figura*)cursor2->DatoLista)->area) { //Aj = area1, Aj+1 = area2
+                aux = ((Figura*)cursor1->DatoLista)->area;
+                ((Figura*)cursor1->DatoLista)->area = ((Figura*)cursor2->DatoLista)->area;
+                ((Figura*)cursor2->DatoLista)->area = aux;
+             }
+            cursor2 = cursor2->SgteDL;
+        }
+        cursor1 = cursor1->SgteDL;
+    }
 
-    getline(ss, auxiliarStr, ' ' ); //Separo la forma
-    setForma(nuevaFigura, auxiliarStr);
-    getline(ss, auxiliarStr, ' ' ); //Separo los numeros
-    setColor(nuevaFigura, auxiliarStr);
+    //Imprimo la lista ordenada
+    cursor1 = listaFigurasAux.Primero;
+    while (cursor1 != Fin_Lista()) {
+        cout << "\t" << ((Figura*)cursor1->DatoLista)->forma << " ";
+        cout << ((Figura*)cursor1->DatoLista)->color << " ";
+        cout << ((Figura*)cursor1->DatoLista)->valor1 << "; ";
+        if (((Figura*)cursor1->DatoLista)->valor2 > 0) {
+            cout << ((Figura*)cursor1->DatoLista)->valor2;
+        }
+        cout << endl;
+        cout << "\t" << ((Figura*)cursor1->DatoLista)->area << endl;
+        cursor1 = cursor1->SgteDL;
+    }
 
-    getline(ss, auxiliarStr, ';' ); //Separo los numeros
-    float auxNumber = convertirStringAFloat(auxiliarStr);
-    setValor1(nuevaFigura,auxNumber);
-
-    getline(ss, auxiliarStr, ';' ); //Separo los numeros
-    auxNumber = convertirStringAFloat(auxiliarStr);
-    setValor2(nuevaFigura,auxNumber);
-
-    Figura* ptrFigura = &nuevaFigura;
-
-    adicionarFinal(datos, ptrFigura); //Se guarda la figura al final de la lista
+    cursor1 = nullptr;
+    delete (cursor1);
+    cursor2 = nullptr;
+    delete (cursor2);
 }
-*/
-

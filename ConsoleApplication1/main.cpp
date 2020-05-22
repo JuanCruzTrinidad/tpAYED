@@ -27,7 +27,7 @@ using namespace std;
     -Color: Listo.
     -Cantidad de Plastico total: Listo.
     -Totales por Figura: Listo.
-    -Totales por Figura-Color:
+    -Totales por Figura-Color: Listo.
     -Dentro de Color mostrar el orden de las figuras:
     -Figuras ordenadas por el tamanio de sus areas:
 */
@@ -37,10 +37,10 @@ int main(int argc, char** argv) {
     Lista listaFiguras; // Lista donde voy a guardar las figuras.
     CrearLista(listaFiguras);   //constructor de la lista
 
-    ifstream Archivo_figuras;
-    Archivo_figuras.open("archivotest.txt", ios::in);   // Abro el archivo (solo leida)
+    ifstream archivo_figuras;
+    archivo_figuras.open("archivotest.txt", ios::in);   // Abro el archivo (solo leida)
 
-    CargarDesdeArchivo(Archivo_figuras, listaFiguras);
+    CargarDesdeArchivo(archivo_figuras, listaFiguras);
     float areaTotal=0;
     recorrerLista(listaFiguras);  //Imprime la lista y calcula el area de las figuras.
     cout << endl;
@@ -51,7 +51,11 @@ int main(int argc, char** argv) {
     cout << "Totales por figura-Color: " << endl;
     totalPorFiguraColor(listaFiguras);
 
-    Archivo_figuras.close();
+    cout << "Orden areas descendente: " << endl;
+    string archivo = "archivotest.txt";
+    figurasDescendienteArea(archivo);
+
+    archivo_figuras.close();
     return 0;
 }
 
