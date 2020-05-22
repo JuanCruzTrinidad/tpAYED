@@ -91,6 +91,8 @@ void CargarListaFiguras(Lista& listaFiguras, string forma, string color, float v
 */
 float convertirStringAFloat(string str); //Es valido crear un .h y .cpp funciones???
 
+void insertarArea(Lista& listaFiguras);
+
 /*
   PRE:
   POST:
@@ -143,6 +145,8 @@ void totalPorFigura(Lista& listaFiguras);
 void totalPorFiguraColor(Lista& listaFiguras);
 
 void coloresEnListaFiguras(Lista& listaFiguras, string colores[10]);
+
+void figurasDescendienteArea(string archivo);
 
 /*
   PRE: la lista listaFiguras debe haber sido creada y contener elementos.
