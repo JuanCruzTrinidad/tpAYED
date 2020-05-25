@@ -29,7 +29,7 @@ using namespace std;
     -Totales por Figura: Listo.
     -Totales por Figura-Color: Listo.
     -Dentro de Color mostrar el orden de las figuras:
-    -Figuras ordenadas por el tamanio de sus areas:
+    -Figuras ordenadas por el tamanio de sus areas: Casi Listo (falta en orden ascendiente).
 */
 
 int main(int argc, char** argv) {
@@ -41,13 +41,16 @@ int main(int argc, char** argv) {
     archivo_figuras.open("archivotest.txt", ios::in);   // Abro el archivo (solo leida)
 
     CargarDesdeArchivo(archivo_figuras, listaFiguras);
-    float areaTotal=0;
+    cout << "Lista de Figuras: " << endl;
     recorrerLista(listaFiguras);  //Imprime la lista y calcula el area de las figuras.
+
     cout << endl;
     cout << "Area Total: " << calcularAreaTotal(listaFiguras) << endl;
     cout << endl;
+
     cout << "Totales por figura: " << endl;
     totalPorFigura(listaFiguras);
+
     cout << "Totales por figura-Color: " << endl;
     totalPorFiguraColor(listaFiguras);
 

@@ -55,8 +55,8 @@ float getValor2(PtrFigura& figura);
 void setValor2(PtrFigura& figura, float valor2);
 
 /*
-  PRE:
-  POST:
+  PRE: el archivo que contiene las figuras debe estar abierto y la lista debe estar inicializada.
+  POST: 
 
   Archivo:
   lista:
@@ -91,30 +91,41 @@ void CargarListaFiguras(Lista& listaFiguras, string forma, string color, float v
 */
 float convertirStringAFloat(string str); //Es valido crear un .h y .cpp funciones???
 
+/*
+  PRE: los valores pasados como parámetros tienen que tener relación con las figuras.
+  POST: devuelve el area de la figura correspondiente.
+
+  nombre: forma de la figura.
+  valor1: valor1 de la figura.
+  valor2: valor2 de la figura.
+  return: el area correspondiente.
+
+  Se compara el parametro nombre con una serie de if's. Si el nombre coincide con alguno entra y hace el calculo del 
+  area. Devuelve ese resultado.
+*/
+float calcularArea(string nombre, float valor1, float valor2);
+
+/*
+  PRE: la listaFiguras debe haber sido creada.
+  POST: inserta el area de cada figura en la listaFiguras.
+
+  listaFiguras: lista sobre la cual se invoca la primitiva.
+
+  Se recorre la lista, se llama a calcularArea que devuelve el area y se inserta el dato en la figura correspondiente de
+  la listaFiguras.
+*/
 void insertarArea(Lista& listaFiguras);
 
 /*
-  PRE:
-  POST:
+  PRE: la listaFiguras debe haber sido creada.
+  POST: se imprime la listaFiguras.
 
-  listaFiguras:
+  listaFiguras: lista sobre la cual se invoca la primitiva.
 
-  acavalalogica
+  Primero se llama a insertarArea para que coloque el area en las respectivas figuras de la listaFiguras. Luego se
+  recorre la lista y se imprime.
 */
 void recorrerLista(Lista& listaFiguras);
-
-/*
-  PRE: 
-  POST:
-
-  nombre:
-  valor1:
-  valor2:
-  return:
-
-  acavalalogica
-*/
-float calcularArea(string nombre, float valor1, float valor2);
 
 /*
   PRE: la listaFiguras debe haber sido creada.
@@ -142,42 +153,38 @@ float calcularAreaTotal(Lista& listaFiguras);
 */
 void totalPorFigura(Lista& listaFiguras);
 
+/*
+  PRE: la listaFiguras debe haber sido creada.
+  POST: se imprimen las figuras con la cantidad que corresponde.
+
+  listaFiguras: lista sobre la cual se invoca la primitiva.
+
+  Se instancian dos arrays de tipo string: uno que contiene todas las formas posibles y otro de tamaño 10 que tendrá los
+  colores. Se guardan los colores que hay en la listaFigura. Luego se recorre la lista de tal manera que se imprimen las
+  figuras ordenadas por figura y color (recomendado ver el codigo para entender mejor).
+*/
 void totalPorFiguraColor(Lista& listaFiguras);
 
+/*
+  PRE: 
+  POST:
+
+  listaFiguras:
+  colores[10]: 
+
+  acavalalogica
+*/
 void coloresEnListaFiguras(Lista& listaFiguras, string colores[10]);
 
+/*
+  PRE: se debe tener un archivo de donde leer las figuras.
+  POST: se muestran las figuras ordenadas por su area.
+
+  archivo: .txt de donde se va a obtener las figuras.
+
+  Lo que hacemos es crear una listaFigurasAux que vendría a ser lo mismo que la listaFigura pero en diferente lugar de memoria.
+  Luego se recorre una serie de whiles donde se ordenan las figuras de mayor a menor. Finalmente se recorre la lista ordenada y se imprime.
+*/
 void figurasDescendienteArea(string archivo);
 
-/*
-  PRE: la lista listaFiguras debe haber sido creada y contener elementos.
-  POST: se imprime la lista listaFiguras.
-
-  listaFiguras: lista donde estan almacenadas las figuras.
-*///
-
-//																									void imprimirListaFiguras(Lista &listaFiguras);
-
-/*
-  PRE: la lista datos debe haber sido creada y contener elementos de tipo Figura, el string auxLinea debe contener
-  una linea de un txt. Es "Simple" porque solo guarda el valor1.
-  POST: se guarda la figura.
-
-  auxLinea: string donde se almacena la linea extraida del archivo.
-  datos: lista que contiene las figuras.
-  nuevaFigura: Figura a ser insertada en la lista.
-*/
-//																							void guardarFiguraSimple(string auxLinea, Lista &datos, Figura* nuevaFigura);
-
-/*
-  PRE: la lista datos debe haber sido creada y contener elementos de tipo Figura, el string auxLinea debe contener
-  una linea de un txt. Es "Compleja" porque guarda el valor1 y el valor2.
-  POST: se guarda la figura.
-
-  auxLinea: string donde se almacena la linea extraida del archivo.
-  datos: lista que contiene las figuras.
-  nuevaFigura: Figura a ser insertada en la lista.
-*/
-//void guardarFiguraCompleja(string auxLinea, Lista& datos, Figura nuevaFigura);
-
 #endif // FIGURA_H_INCLUDED
-

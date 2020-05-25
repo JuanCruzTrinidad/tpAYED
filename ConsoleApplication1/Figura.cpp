@@ -54,7 +54,6 @@ void setValor2(PtrFigura& figura, float valor2) {
     figura->valor2 = valor2;
 }
 
-
 void CargarDesdeArchivo(ifstream& Archivo, Lista& lista)
 {
     string linea, Dato2, Dato1, Dato3, Dato4;
@@ -132,6 +131,28 @@ float convertirStringAFloat(string str) {
     return number;
 }
 
+float calcularArea(string nombre, float valor1, float valor2) {
+
+    float area = 0;
+
+    if (nombre.compare("circulo") == false) {
+        area = valor1 * 3.14;
+    }
+    if (nombre.compare("cubo") == false) {
+        area = valor1 * valor1;
+    }
+    if (nombre.compare("triangulo") == false) {
+        area = (valor1 * valor2) / 2;
+    }
+    if (nombre.compare("rectangulo") == false) {
+        area = valor1 * valor2;
+    }
+    if (nombre.compare("cilindro") == false) {
+        area = (valor1 * 3.14) * valor2;
+    }
+    return area;
+}
+
 void insertarArea(Lista& listaFiguras) {
     PtrNodoLista cursor = listaFiguras.Primero;
     while (cursor != Fin_Lista()) {
@@ -141,7 +162,6 @@ void insertarArea(Lista& listaFiguras) {
     cursor = nullptr;
     delete(cursor);
 }
-
 
 /*Recorro la lista e imprimo */
 void recorrerLista(Lista& listaFiguras) {
@@ -163,28 +183,6 @@ void recorrerLista(Lista& listaFiguras) {
         cursor = cursor->SgteDL;
     }
     delete (cursor);
-}
-
-float calcularArea(string nombre, float valor1, float valor2) {
-
-    float area = 0;
-
-    if (nombre.compare("circulo") == false) {
-        area = valor1 * 3.14;
-    }
-    if (nombre.compare("cubo") == false) {
-        area = valor1 * valor1;
-    }
-    if (nombre.compare("triangulo") == false) {
-        area = (valor1 * valor2) / 2;
-    }
-    if (nombre.compare("rectangulo") == false) {
-        area = valor1 * valor2;
-    }
-    if (nombre.compare("cilindro") == false) {
-        area = (valor1 * 3.14) * valor2;
-    }
-    return area;
 }
 
 /* calcula el total de plastico utilizado */
@@ -264,6 +262,7 @@ void totalPorFiguraColor(Lista& listaFiguras) {
                 cout << "\tDetalle: " << figuras[i] << endl;
                 while (cursor != Fin_Lista()) {
                     if (((Figura*)cursor->DatoLista)->forma == figuras[i] && ((Figura*)cursor->DatoLista)->color == colores[j]) {
+                        //Imprimo
                         cout << "\t~" << figuras[i] << ", " << ((Figura*)cursor->DatoLista)->color << ", " << ((Figura*)cursor->DatoLista)->area << endl;
                         sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
                     }
@@ -273,9 +272,7 @@ void totalPorFiguraColor(Lista& listaFiguras) {
                 sumaAreas = 0;
                 cursor = listaFiguras.Primero;
             }
-
         }
-        
     }
     //Hay que ponerlo en null primero pq cuando lo deleteas sin esto creo que comprometes a la lista.
     cursor = nullptr;
