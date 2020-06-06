@@ -1,0 +1,8 @@
+circulo rojo 2,5
+cubo azul 4
+cilindro amarillo 2,5; 3
+rectangulo amarillo 6; 3
+circulo azul 2
+triangulo azul 5; 2,5
+rectangulo verde 2; 5
+rectangulo verde 3; 6

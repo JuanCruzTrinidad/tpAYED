@@ -1,0 +1,79 @@
+# depslib dependency file v1.0
+1590435932 source:c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\tpayed-master\consoleapplication1\figura.cpp
+	"Figura.h"
+	"Lista.h"
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+
+1590435932 c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\tpayed-master\consoleapplication1\figura.h
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+	"Lista.h"
+
+1590435932 c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\tpayed-master\consoleapplication1\lista.h
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+
+1590435932 source:c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\tpayed-master\consoleapplication1\lista.cpp
+	"Lista.h"
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+
+1590435932 source:c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\tpayed-master\consoleapplication1\main.cpp
+	<cmath>
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+	<stdlib.h>
+	<iomanip>
+	"Lista.h"
+	"Figura.h"
+
+1591169741 source:c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\carpeta para proyecto\tpfinal\main.cpp
+	<cmath>
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+	<stdlib.h>
+	<iomanip>
+	"Lista.h"
+	"Figura.h"
+
+1590453478 c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\carpeta para proyecto\tpfinal\lista.h
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+
+1591169677 c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\carpeta para proyecto\tpfinal\figura.h
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+	"Lista.h"
+
+1591171008 source:c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\carpeta para proyecto\tpfinal\figura.cpp
+	"Figura.h"
+	"Lista.h"
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+
+1590453476 source:c:\users\user\desktop\unla\4.2 algoritmos y estructuras de datos\tp final\ultima version\carpeta para proyecto\tpfinal\lista.cpp
+	"Lista.h"
+	<iostream>
+	<fstream>
+	<string>
+	<sstream>
+
