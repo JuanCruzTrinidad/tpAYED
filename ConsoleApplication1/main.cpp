@@ -46,15 +46,15 @@ int main(int argc, char** argv) {
 
     while(on){
         int opcion;
-        cout << "------------------------------------Bienvenido------------------------------------";
-        cout << "\n\nSeleccione la operacion: \n\t1.Imprimir la lista de todas las Figuras" << endl;
-        cout << "\t2.Cantidad de plastico total del lote"<<endl;
-        cout << "\t3.Totales por Figura" << endl;
-        cout << "\t4.Totales por Figura-Color" << endl;
-        cout << "\t5.De cada color, mostrar el orden de produccion"<< endl;
-        cout << "\t6.Figuras ordenadas por area(descendente)" << endl;
-        cout << "\t7.Figuras ordenadas por area(ascendente)" << endl;
-        cout << "\t0.Salir" << endl;
+        cout << "------------------------------------BIENVENIDO------------------------------------";
+        cout << "\n\nSeleccione la operacion: \n\t1 - Imprimir la lista de todas las Figuras" << endl;
+        cout << "\t2 - Cantidad de plastico total del lote"<<endl;
+        cout << "\t3 - Totales por Figura" << endl;
+        cout << "\t4 - Totales por Figura-Color" << endl;
+        cout << "\t5 - De cada color, mostrar el orden de produccion"<< endl;
+        cout << "\t6 - Figuras ordenadas por area(descendente)" << endl;
+        cout << "\t7 - Figuras ordenadas por area(ascendente)" << endl;
+        cout << "\t0 - Salir" << endl;
         cin >> opcion;
 
         switch(opcion){
@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
                 recorrerLista(listaFiguras);  //Imprime la lista y calcula el area de las figuras.
                 break;}
             case 2:{
-                cout << "Area Total: " << calcularAreaTotal(listaFiguras) << endl;
+                cout << "Area Total: " << calcularAreaTotal(listaFiguras) << " cm^2" <<endl;
                 break;}
             case 3:{
                 cout << "Totales por Figura: " << endl;
@@ -74,7 +74,7 @@ int main(int argc, char** argv) {
                 totalPorFiguraColor(listaFiguras);
                 break;}
             case 5:{
-                cout << "Por cada color, las figuras en orden de produccion" << endl;
+                cout << "Por cada color, las figuras en orden de produccion:" << endl;
                 colorOrdenFiguras(listaFiguras);
                 break;}
             case 6:{

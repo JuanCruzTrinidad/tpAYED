@@ -21,7 +21,7 @@ typedef struct {
     float valor1;
     float valor2;
     float area;
-}Figura;
+} Figura;
 
 /*
 

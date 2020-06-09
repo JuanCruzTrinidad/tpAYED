@@ -168,17 +168,14 @@ void recorrerLista(Lista& listaFiguras) {
     PtrNodoLista cursor = listaFiguras.Primero;
     float areaTotal = 0;
 
-    //Calculamos y guardamos el area de cada figura.
-    //insertarArea(listaFiguras);
-
     while (cursor != Fin_Lista()) {
-        cout <<"\t*"<< ((Figura*)cursor->DatoLista)->forma << " ";
+        cout <<"  ~"<< ((Figura*)cursor->DatoLista)->forma << " ";
         cout << ((Figura*)cursor->DatoLista)->color << " ";
         cout << ((Figura*)cursor->DatoLista)->valor1 << "; ";
         if (((Figura*)cursor->DatoLista)->valor2 > 0) {
             cout << ((Figura*)cursor->DatoLista)->valor2;
         }
-        cout << "\n\t\tArea: " << ((Figura*)cursor->DatoLista)->area << endl;
+        cout << "\n    Area: " << ((Figura*)cursor->DatoLista)->area << endl;
         cursor = cursor->SgteDL;
     }
     delete (cursor);
@@ -229,15 +226,15 @@ void totalPorFigura(Lista& listaFiguras) {
     float sumaAreas = 0;
 
     for (int i = 0; i <= 4; i++) { //Figuras
-        cout << "\t*Detalle: "<< figuras[i] << endl;
+        cout << "  ~Figura: "<< figuras[i] << endl;
         while (cursor != Fin_Lista()) {
             if (((Figura*)cursor->DatoLista)->forma == figuras[i]) {
-                cout << "\t-" << ((Figura*)cursor->DatoLista)->color <<", "<<((Figura*)cursor->DatoLista)->area << endl;
+                cout << "    -" << ((Figura*)cursor->DatoLista)->color <<", "<<((Figura*)cursor->DatoLista)->area << endl;
                 sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
             }
             cursor = cursor->SgteDL;
         }
-        cout << "\t" << "    TOTAL: " << sumaAreas << " cm^2." << endl << endl;
+        cout << "    TOTAL: " << sumaAreas << " cm^2." << endl << endl;
         sumaAreas = 0;
         cursor = listaFiguras.Primero;
     }
@@ -258,16 +255,16 @@ void totalPorFiguraColor(Lista& listaFiguras) {
         if (colores[j] != "") { //Si la posicion no esta vacia.
             cout << "----------------- Color " << colores[j] << " -----------------" << endl;
             for (int i = 0; i <= 4; i++) { //Figuras
-                cout << "\tDetalle: " << figuras[i] << endl;
+                cout << "  ~Figura: " << figuras[i] << endl;
                 while (cursor != Fin_Lista()) {
                     if (((Figura*)cursor->DatoLista)->forma == figuras[i] && ((Figura*)cursor->DatoLista)->color == colores[j]) {
                         //Imprimo
-                        cout << "\t~" << figuras[i] << ", " << ((Figura*)cursor->DatoLista)->color << ", " << ((Figura*)cursor->DatoLista)->area << endl;
+                        cout << "    -" << ((Figura*)cursor->DatoLista)->color << ", " << ((Figura*)cursor->DatoLista)->area << endl;
                         sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
                     }
                     cursor = cursor->SgteDL;
                 }
-                cout << "\t" << "Total: " << sumaAreas << " cm^2." << endl << endl;
+                cout << "    TOTAL: " << sumaAreas << " cm^2." << endl << endl;
                 sumaAreas = 0;
                 cursor = listaFiguras.Primero;
             }
@@ -380,20 +377,20 @@ void colorOrdenFiguras (Lista& listaFiguras){
         if (colores[j] != "") { //Si existe
             auxColor = colores[j];
             auxOrden = 0;
-            cout << "\t*Figuras de color " << auxColor << endl;
+            cout << "  ~Figuras de color " << auxColor << endl;
             cursor = listaFiguras.Primero;
 
             while (cursor != Fin_Lista()){ //imprimo las figuras que coinciden con el color
                 auxOrden++;
                 if (((Figura*)cursor->DatoLista)->color == auxColor) {
                         //auxOrden++;
-                        cout << "\t\t"<<auxOrden<<") " <<((Figura*)cursor->DatoLista)->forma << " con area: " << ((Figura*)cursor->DatoLista)->area << endl;
+                        cout << "     "<< auxOrden <<") " <<((Figura*)cursor->DatoLista)->forma << " de area: " << ((Figura*)cursor->DatoLista)->area << endl;
                 }
                 cursor = cursor->SgteDL;
             }
         }
     }
-    cout <<"\n\n";
+    cout <<"\n";
     cursor = nullptr;
     delete (cursor);
 }
