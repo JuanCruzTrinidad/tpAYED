@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
         switch(opcion){
             case 1:{
                 cout << "Lista de Figuras: " << endl;
-                recorrerLista(listaFiguras);  //Imprime la lista y calcula el area de las figuras.
+                imprimirFiguras(listaFiguras);  //Imprime la lista y calcula el area de las figuras.
                 break;}
             case 2:{
                 cout << "Area Total: " << calcularAreaTotal(listaFiguras) << " cm^2" <<endl;

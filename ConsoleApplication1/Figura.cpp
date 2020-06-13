@@ -163,10 +163,10 @@ void insertarArea(Lista& listaFiguras) {
     delete(cursor);
 }
 
-/*Recorro la lista e imprimo */
-void recorrerLista(Lista& listaFiguras) {
+/* imprimir la lista de figuras */
+void imprimirFiguras(Lista& listaFiguras) {
     PtrNodoLista cursor = listaFiguras.Primero;
-    float areaTotal = 0;
+    //float areaTotal = 0;
 
     while (cursor != Fin_Lista()) {
         cout <<"  ~"<< ((Figura*)cursor->DatoLista)->forma << " ";
@@ -270,7 +270,6 @@ void totalPorFiguraColor(Lista& listaFiguras) {
             }
         }
     }
-    //Hay que ponerlo en null primero pq cuando lo deleteas sin esto creo que comprometes a la lista.
     cursor = nullptr;
     delete (cursor);
 }
@@ -310,7 +309,7 @@ void ordenDescendenteArea(string archivo) {
     }
 
 
-    recorrerLista(listaFigurasAux);
+    imprimirFiguras(listaFigurasAux);
 
     cursor1 = nullptr;
     delete (cursor1);
@@ -356,7 +355,7 @@ void ordenAscendenteArea(string archivo) {
     }
 
 
-    recorrerLista(listaFigurasAux);
+    imprimirFiguras(listaFigurasAux);
 
     cursor1 = nullptr;
     delete (cursor1);
