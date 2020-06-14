@@ -1,6 +1,5 @@
 #include "Lista.h"
 
-//ver si es necesario
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -57,12 +56,14 @@ void AdicionarFinal(Lista& mi_lista, PtrDatoLista mi_dato)
     }
 }
 
+
 PtrNodoLista CrearNodo(PtrDatoLista mi_dato)
 {
     PtrNodoLista NuevoNodo = new NodoLista;
     NuevoNodo->DatoLista = mi_dato;
     return NuevoNodo;
 }
+
 
 void AdicionarDespues(Lista& mi_lista, PtrNodoLista NodoApuntado, PtrDatoLista mi_dato)
 {
@@ -85,6 +86,7 @@ void AdicionarAntes(Lista& mi_lista, PtrNodoLista NodoApuntado, PtrDatoLista mi_
         NuevoNodo->SgteDL = NodoApuntado;
     }
 }
+
 
 PtrNodoLista Primero(Lista& mi_lista)
 {
@@ -114,6 +116,7 @@ PtrNodoLista Anterior(Lista& mi_lista, PtrNodoLista NodoApuntado)
         return Fin_Lista();
 }
 
+
 PtrNodoLista Siguiente(Lista& mi_lista, PtrNodoLista NodoApuntado)
 {
     if (!ListaVacia(mi_lista))
@@ -141,6 +144,7 @@ void EliminarPrimero(Lista& mi_lista)
     }
 }
 
+
 void EliminarUltimo(Lista& mi_lista)
 {
     if (!ListaVacia(mi_lista))
@@ -156,6 +160,7 @@ void EliminarUltimo(Lista& mi_lista)
     }
 }
 
+
 void EliminarNodo(Lista& mi_lista, PtrNodoLista NodoApuntado)
 {
     if (NodoApuntado == Primero(mi_lista))
@@ -169,10 +174,12 @@ void EliminarNodo(Lista& mi_lista, PtrNodoLista NodoApuntado)
     delete NodoApuntado;
 }
 
+
 void ColocarDato(Lista& mi_lista, PtrNodoLista NodoApuntado, PtrDatoLista mi_dato)
 {
     NodoApuntado->DatoLista = mi_dato;
 }
+
 
 PtrDatoLista ObtenerDato(Lista mi_lista, PtrNodoLista NodoApuntado)
 {
@@ -196,6 +203,7 @@ void EliminarDatoYNodo(Lista& mi_lista, PtrDatoLista mi_dato)
         }
     }
 }
+
 
 PtrNodoLista LocalizarDato(Lista mi_lista, PtrDatoLista mi_dato)
 {
@@ -227,73 +235,3 @@ int Longitud_Lista(Lista mi_lista)
     }
     return i;
 }
-
-/*
-void imprimirLista(Lista &listaFiguras){
-    /*Figura * auxFigura;
-    int i=0;
-    PtrNodoLista actual = primero(listaFiguras);
-
-    while(i<longitud(listaFiguras)){ //Se imprime hasta que termine la lista
-        auxFigura = (Figura*)actual->ptrDato;
-
-        cout<<"Figura: "<<auxFigura->forma<<", "<< auxFigura->color<<", "<< auxFigura->valor1 <<" | "<< auxFigura->valor2<<endl;
-
-        i++;
-
-        actual = siguiente(listaFiguras,actual);
-    }
-
-    int i=0;
-    PtrNodoLista actual = primero(listaFiguras);
-    Figura * nuevaFigura;
-
-    while(i<longitud(listaFiguras)){ //Se imprime hasta que termine la lista
-        nuevaFigura = (Figura*)actual->ptrDato;
-
-
-        cout<<"Figura: "<<getForma(nuevaFigura)<<", "<< getColor(nuevaFigura)<< endl;//", "<< getValor1(nuevaFigura) <<" | "<< getValor2(nuevaFigura)<<endl;
-
-        i++;
-
-        actual = siguiente(mi_lista,actual);
-    }
-}
-*/
-
-
-/*
-void guardarFiguraSimple(string auxLinea, Lista &datos, Figura &nuevaFigura){
-
-    stringstream ss(auxLinea);
-
-    //Obtengo los datos y los guardo donde corresponde
-
-    //getline(ss, nuevaFigura->forma, ' ' ); //Separo la forma
-    //getline(ss, nuevaFigura->color, ' ' ); //Separo los numeros
-    string auxiliarStr;
-
-    getline(ss, auxiliarStr, ' ' ); //Separo la forma
-    setForma(nuevaFigura, auxiliarStr);
-    getline(ss, auxiliarStr, ' ' ); //Separo los numeros
-    setColor(nuevaFigura, auxiliarStr);
-
-    //getline(ss, auxiliarStr, ' ' ); //Separo los numeros
-    //float auxNumber = convertirStringAFloat(auxiliarStr);
-    //nuevaFigura->valor1 = auxNumber;
-    //setValor1(nuevaFigura,auxNumber);
-
-    //nuevaFigura->valor2 = NULL;
-    //setValor2(nuevaFigura,NULL);
-   // Figura* ptrFigura = &nuevaFigura;
-
-    //cout << ptrFigura->forma;
-    //cout << "Forma: " << getForma(nuevaFigura) << endl;
-    //cout << "Color: " << getColor(nuevaFigura) << endl;
-
-    adicionarFinal(datos, nuevaFigura); //Se guarda la figura al final de la lista
-
-    //imprimirListaFiguras(datos);
-}
-*/
-

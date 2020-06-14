@@ -12,12 +12,6 @@ using namespace std;
 
 void crearFigura(PtrFigura& mi_figura) {
     mi_figura = new Figura;
-
-    /* figura->forma = "";
-     figura->color = "";
-     figura->valor1 = NULL;
-     figura->valor2 = NULL;*/
-
 }
 
 string getForma(PtrFigura& figura) {
@@ -36,7 +30,6 @@ void setColor(PtrFigura& figura, string color) {
     figura->color = color;
 }
 
-
 float getValor1(PtrFigura& figura) {
     return figura->valor1;
 }
@@ -44,7 +37,6 @@ float getValor1(PtrFigura& figura) {
 void setValor1(PtrFigura& figura, float valor1) {
     figura->valor1 = valor1;
 }
-
 
 float getValor2(PtrFigura& figura) {
     return figura->valor2;
@@ -113,7 +105,6 @@ void CargarListaFiguras(Lista& listaFiguras, string forma, string color, float  
         setValor2(nuevo, 0);
     }
     AdicionarFinal(listaFiguras, nuevo);
-    /* delete (nuevo);*/
 }
 
 float convertirStringAFloat(string str) {
@@ -163,10 +154,9 @@ void insertarArea(Lista& listaFiguras) {
     delete(cursor);
 }
 
-/*Recorro la lista e imprimo */
-void recorrerLista(Lista& listaFiguras) {
+/* imprimir la lista de figuras */
+void imprimirFiguras(Lista& listaFiguras) {
     PtrNodoLista cursor = listaFiguras.Primero;
-    float areaTotal = 0;
 
     while (cursor != Fin_Lista()) {
         cout <<"  ~"<< ((Figura*)cursor->DatoLista)->forma << " ";
@@ -175,7 +165,7 @@ void recorrerLista(Lista& listaFiguras) {
         if (((Figura*)cursor->DatoLista)->valor2 > 0) {
             cout << ((Figura*)cursor->DatoLista)->valor2;
         }
-        cout << "\n    Area: " << ((Figura*)cursor->DatoLista)->area << endl;
+        cout << "\n    Area: " << ((Figura*)cursor->DatoLista)->area << " cm^2" << endl;
         cursor = cursor->SgteDL;
     }
     delete (cursor);
@@ -229,7 +219,9 @@ void totalPorFigura(Lista& listaFiguras) {
         cout << "  ~Figura: "<< figuras[i] << endl;
         while (cursor != Fin_Lista()) {
             if (((Figura*)cursor->DatoLista)->forma == figuras[i]) {
-                cout << "    -" << ((Figura*)cursor->DatoLista)->color <<", "<<((Figura*)cursor->DatoLista)->area << endl;
+                cout << "    -" << ((Figura*)cursor->DatoLista)->color << ", " << ((Figura*)cursor->DatoLista)->valor1 
+                    << ", " << ((Figura*)cursor->DatoLista)->valor2 << ". Area: " <<((Figura*)cursor->DatoLista)->area 
+                    << " cm^2" << endl;
                 sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
             }
             cursor = cursor->SgteDL;
@@ -259,7 +251,9 @@ void totalPorFiguraColor(Lista& listaFiguras) {
                 while (cursor != Fin_Lista()) {
                     if (((Figura*)cursor->DatoLista)->forma == figuras[i] && ((Figura*)cursor->DatoLista)->color == colores[j]) {
                         //Imprimo
-                        cout << "    -" << ((Figura*)cursor->DatoLista)->color << ", " << ((Figura*)cursor->DatoLista)->area << endl;
+                        cout << "    -" << ((Figura*)cursor->DatoLista)->color << ", " << 
+                            ((Figura*)cursor->DatoLista)->valor1 << ", " << ((Figura*)cursor->DatoLista)->valor2 <<
+                            ". Area: " << ((Figura*)cursor->DatoLista)->area << " cm^2" << endl;
                         sumaAreas = sumaAreas + ((Figura*)cursor->DatoLista)->area;
                     }
                     cursor = cursor->SgteDL;
@@ -270,7 +264,6 @@ void totalPorFiguraColor(Lista& listaFiguras) {
             }
         }
     }
-    //Hay que ponerlo en null primero pq cuando lo deleteas sin esto creo que comprometes a la lista.
     cursor = nullptr;
     delete (cursor);
 }
@@ -299,7 +292,7 @@ void ordenDescendenteArea(string archivo) {
         cursor2 = listaFigurasAux.Primero;
         while (cursor2 != Fin_Lista()) {
 
-            if (((Figura*)cursor1->DatoLista)->area > ((Figura*)cursor2->DatoLista)->area) { //Aj = area1, Aj+1 = area2
+            if (((Figura*)cursor1->DatoLista)->area > ((Figura*)cursor2->DatoLista)->area) {
                 aux = (Figura*)cursor1->DatoLista;
                 cursor1->DatoLista = cursor2->DatoLista;
                 cursor2->DatoLista = aux;
@@ -309,8 +302,7 @@ void ordenDescendenteArea(string archivo) {
         cursor1 = cursor1->SgteDL;
     }
 
-
-    recorrerLista(listaFigurasAux);
+    imprimirFiguras(listaFigurasAux);
 
     cursor1 = nullptr;
     delete (cursor1);
@@ -345,7 +337,7 @@ void ordenAscendenteArea(string archivo) {
         cursor2 = listaFigurasAux.Primero;
         while (cursor2 != Fin_Lista()) {
 
-            if (((Figura*)cursor1->DatoLista)->area < ((Figura*)cursor2->DatoLista)->area) { //Aj = area1, Aj+1 = area2
+            if (((Figura*)cursor1->DatoLista)->area < ((Figura*)cursor2->DatoLista)->area) {
                 aux = (Figura*)cursor1->DatoLista;
                 cursor1->DatoLista = cursor2->DatoLista;
                 cursor2->DatoLista = aux;
@@ -355,8 +347,7 @@ void ordenAscendenteArea(string archivo) {
         cursor1 = cursor1->SgteDL;
     }
 
-
-    recorrerLista(listaFigurasAux);
+    imprimirFiguras(listaFigurasAux);
 
     cursor1 = nullptr;
     delete (cursor1);
@@ -377,14 +368,15 @@ void colorOrdenFiguras (Lista& listaFiguras){
         if (colores[j] != "") { //Si existe
             auxColor = colores[j];
             auxOrden = 0;
-            cout << "  ~Figuras de color " << auxColor << endl;
+            cout << "  \n~Figuras de color " << auxColor << endl;
             cursor = listaFiguras.Primero;
 
             while (cursor != Fin_Lista()){ //imprimo las figuras que coinciden con el color
                 auxOrden++;
                 if (((Figura*)cursor->DatoLista)->color == auxColor) {
-                        //auxOrden++;
-                        cout << "     "<< auxOrden <<") " <<((Figura*)cursor->DatoLista)->forma << " de area: " << ((Figura*)cursor->DatoLista)->area << endl;
+                        cout << "     " << auxOrden << ") " << ((Figura*)cursor->DatoLista)->forma << 
+                            ", " << ((Figura*)cursor->DatoLista)->valor1 << ", " <<((Figura*)cursor->DatoLista)->valor2 
+                            << ". Area: " << ((Figura*)cursor->DatoLista)->area << " cm^2" << endl;
                 }
                 cursor = cursor->SgteDL;
             }

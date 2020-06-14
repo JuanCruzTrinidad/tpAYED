@@ -244,9 +244,5 @@ PtrNodoLista LocalizarDato(Lista mi_lista, PtrDatoLista mi_dato);
 */
 int Longitud_Lista(Lista mi_lista);
 
-//void imprimirLista(Lista &mi_lista);
-
-//void guardarFiguraSimple(string auxLinea, Lista &datos, Figura //&nuevaFigura);
 
 #endif // __LISTA_H__
-
